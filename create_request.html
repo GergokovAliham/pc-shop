@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мои заявки — CompShop</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon">🖥️</div>
+            <span class="logo-text">CompShop</span>
+        </div>
+        <div class="user-info">
+            <span id="userDisplay">Гость</span>
+            <button id="logoutBtn" class="btn-logout" style="display: none;">Выйти</button>
+            <a href="login.html" id="loginLink" class="btn-logout" style="background: #4a7db5;">Войти</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav class="vertical-menu">
+            <div class="menu-title">Навигация</div>
+            <ul>
+                <li><a href="index.html">🏠 Главная</a></li>
+                <li><a href="register.html">📝 Регистрация</a></li>
+                <li><a href="login.html">🔐 Вход</a></li>
+                <li><a href="create_request.html">📋 Мои заявки</a></li>
+            </ul>
+        </nav>
+
+        <main class="content">
+            <h2>📋 Мои заявки</h2>
+            <div id="requestMessageBox"></div>
+
+            <!-- Таблица с историей заявок -->
+            <h3>📌 История заявок</h3>
+            <div style="overflow-x: auto;">
+                <table class="requests-table" id="requestsTable">
+                    <thead>
+                        <tr><th>ID</th><th>Дата</th><th>Услуга</th><th>Адрес</th><th>Оплата</th><th>Статус</th></tr>
+                    </thead>
+                    <tbody id="requestsBody">
+                        <tr><td colspan="6" style="text-align:center;">Загрузка...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Форма создания новой заявки (только для авторизованных) -->
+            <h3 style="margin-top: 35px;">➕ Новая заявка на услугу</h3>
+            <div id="unauthorizedMessage" style="display: none;" class="notification error">
+                Для создания заявки необходимо <a href="login.html">авторизоваться</a>.
+            </div>
+            <form id="requestForm" style="display: none;">
+                <div class="form-group">
+                    <label>Адрес *</label>
+                    <input type="text" id="address" required placeholder="г. Москва, ул. Примерная, д.1">
+                </div>
+                <div class="form-group">
+                    <label>Контактные данные *</label>
+                    <input type="text" id="contact" required placeholder="Телефон или email">
+                </div>
+                <div class="form-group">
+                    <label>Желаемая дата и время *</label>
+                    <input type="datetime-local" id="desiredDate" required>
+                </div>
+                <div class="form-group">
+                    <label>Вид услуги *</label>
+                    <select id="serviceType" required>
+                        <option value="">-- Выберите услугу --</option>
+                        <option value="Сборка ПК">Сборка ПК</option>
+                        <option value="Диагностика">Диагностика</option>
+                        <option value="Ремонт">Ремонт</option>
+                        <option value="Установка ПО">Установка ПО</option>
+                        <option value="Консультация">Консультация</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Тип оплаты *</label>
+                    <select id="paymentType" required>
+                        <option value="">-- Выберите --</option>
+                        <option value="Наличные">Наличные</option>
+                        <option value="Банковская карта">Банковская карта</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary">Отправить заявку</button>
+            </form>
+        </main>
+    </div>
+
+    <footer class="footer">
+        © 2026 CompShop. Все права защищены. Учебный проект.
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+    <title>CompShop — магазин компьютеров</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon">🖥️</div>
+            <span class="logo-text">CompShop</span>
+        </div>
+        <div class="user-info">
+            <span id="userDisplay">Гость</span>
+            <button id="logoutBtn" class="btn-logout" style="display: none;">Выйти</button>
+            <a href="login.html" id="loginLink" class="btn-logout" style="background: #4a7db5;">Войти</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Вертикальное меню -->
+        <nav class="vertical-menu">
+            <div class="menu-title">Навигация</div>
+            <ul>
+                <li><a href="index.html">🏠 Главная</a></li>
+                <li><a href="register.html">📝 Регистрация</a></li>
+                <li><a href="login.html">🔐 Вход</a></li>
+                <li><a href="create_request.html">📋 Мои заявки</a></li>
+            </ul>
+            <div style="padding: 20px; margin-top: 10px; border-top: 1px solid #e0e6ed;">
+                <p style="font-size: 0.9rem; color: #4a5568;">📍 Магазин ПК<br>🕒 Пн-Вс 10:00–20:00</p>
+            </div>
+        </nav>
+
+        <!-- Основной контент: каталог товаров -->
+        <main class="content">
+            <h1>🛒 Каталог компьютеров</h1>
+            <p style="margin-bottom: 25px; color: #4a5568;">Найдите идеальный ПК для работы, игр и творчества</p>
+
+            <div class="catalog-grid" id="catalogContainer">
+                <!-- Карточки генерируются через JS, либо можно статично -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        © 2026 CompShop. Все права защищены. Учебный проект.
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Рендер каталога (можно и статично, но для гибкости сделаем через JS)
+        const catalogData = [
+            { id: 1, name: 'Игровой ПК "Frost X"', price: '119 990 ₽', img: 'images/pc1.png' },
+            { id: 2, name: 'Офисный ПК "WorkPro"', price: '39 990 ₽', img: 'images/pc2.png' },
+            { id: 3, name: 'Рабочая станция "Creator"', price: '179 990 ₽', img: 'images/pc3.png' },
+            { id: 4, name: 'Ноутбук "UltraBook 15"', price: '89 990 ₽', img: 'images/notebook1.png' },
+            { id: 5, name: 'Моноблок "Studio"', price: '129 990 ₽', img: 'images/aio.png' },
+            { id: 6, name: 'Мини-ПК "Nano"', price: '54 990 ₽', img: 'images/minipc.png' }
+        ];
+
+        const container = document.getElementById('catalogContainer');
+        if (container) {
+            catalogData.forEach(p => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <img src="${p.img}" alt="${p.name}" class="product-image" onerror="this.src='https://via.placeholder.com/200x140/2a3f6e/ffffff?text=${encodeURIComponent(p.name)}'">
+                    <div class="product-title">${p.name}</div>
+                    <div class="product-price">${p.price}</div>
+                    <button class="btn-add" data-id="${p.id}" data-name="${p.name}" data-price="${p.price}">🛍️ Купить</button>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Обработчик кнопок "Купить" (демонстрация, можно расширить)
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('btn-add')) {
+                const name = e.target.dataset.name;
+                alert(`Товар "${name}" добавлен в корзину (демо). Для оформления заявки перейдите в "Мои заявки".`);
+            }
+        });
+    </script>
+</body>
+</html>
